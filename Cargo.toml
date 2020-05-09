@@ -19,3 +19,6 @@ criterion = "0.3"
 name = "insertion_sort"
 harness = false
 
+[[bench]]
+name = "merge_sort"
+harness = false
