@@ -1,44 +1,45 @@
-pub fn merge_sort<T:PartialOrd + Copy>(container: &mut [T]) {
-  if container.len() > 1 {
-    let middle = (container.len() - 1) / 2;
-    merge_sort(&mut container[..=middle]);
-    merge_sort(&mut container[middle + 1..]);
-    _merge(container);
-  }
+pub fn merge_sort<T: PartialOrd + Copy>(container: &mut [T]) {
+    if container.len() > 1 {
+        let middle = (container.len() - 1) / 2;
+        merge_sort(&mut container[..=middle]);
+        merge_sort(&mut container[middle + 1..]);
+        _merge(container);
+    }
 }
 
-fn _merge<T:PartialOrd + Copy>(container: &mut [T]) {
-  let middle = (container.len() - 1) / 2;
-  let left: Vec<T> = (0..=middle).map(|i| container[i]).collect();
-  let right: Vec<T> = (middle + 1..container.len()).map(|i| container[i]).collect();
+fn _merge<T: PartialOrd + Copy>(container: &mut [T]) {
+    let middle = (container.len() - 1) / 2;
+    let left: Vec<T> = (0..=middle).map(|i| container[i]).collect();
+    let right: Vec<T> = (middle + 1..container.len())
+        .map(|i| container[i])
+        .collect();
 
-  let mut k = 0;
-  let mut i = 0;
-  let mut j = 0;
+    let mut k = 0;
+    let mut i = 0;
+    let mut j = 0;
 
-  while i < left.len() && j < right.len() {
-    if left[i] < right[j] {
-      container[k] = left[i];
-      i += 1;
-    } else {
-      container[k] = right[j];
-      j += 1;
+    while i < left.len() && j < right.len() {
+        if left[i] < right[j] {
+            container[k] = left[i];
+            i += 1;
+        } else {
+            container[k] = right[j];
+            j += 1;
+        }
+        k += 1;
     }
-    k += 1;
-  }
 
-  while i < left.len() {
-    container[k] = left[i];
-    i += 1;
-    k += 1;
-  }
+    while i < left.len() {
+        container[k] = left[i];
+        i += 1;
+        k += 1;
+    }
 
-  while j < right.len() {
-    container[k] = right[j];
-    j += 1;
-    k += 1;
-  }
-  
+    while j < right.len() {
+        container[k] = right[j];
+        j += 1;
+        k += 1;
+    }
 }
 
 #[cfg(test)]

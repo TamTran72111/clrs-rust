@@ -25,16 +25,13 @@ fn bench_1000_sorted_integers(c: &mut Criterion) {
 
 fn bench_1000_descending_sorted_integers(c: &mut Criterion) {
     let container: Vec<i32> = (0..1000).rev().collect();
-    c.bench_function(
-        "merge sort 1000 descending sorted integers",
-        move |b| {
-            b.iter_batched(
-                || container.clone(),
-                |mut data| merge_sort(black_box(&mut data)),
-                BatchSize::SmallInput,
-            )
-        },
-    );
+    c.bench_function("merge sort 1000 descending sorted integers", move |b| {
+        b.iter_batched(
+            || container.clone(),
+            |mut data| merge_sort(black_box(&mut data)),
+            BatchSize::SmallInput,
+        )
+    });
 }
 
 criterion_group!(
