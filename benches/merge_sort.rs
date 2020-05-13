@@ -1,10 +1,12 @@
 use clrs_rust::merge_sort::merge_sort;
 use criterion::{black_box, criterion_group, criterion_main, BatchSize, Criterion};
+use rand::rngs::StdRng;
 use rand::seq::SliceRandom;
-use rand::thread_rng;
+use rand::SeedableRng;
 
 fn bench_1000_shuffled_integers(c: &mut Criterion) {
-    let mut rng = thread_rng();
+    let seed = [0; 32];
+    let mut rng = StdRng::from_seed(seed);
     let mut arr: Vec<i32> = (0..1000).collect();
     arr.shuffle(&mut rng);
     c.bench_function("merge sort 1000 shuffled elements", move |b| {
