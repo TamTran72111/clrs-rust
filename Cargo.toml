@@ -27,7 +27,10 @@ harness = false
 name = "heap_sort"
 harness = false
 
-
 [[bench]]
 name = "quick_sort"
+harness = false
+
+[[bench]]
+name = "random_quick_sort"
 harness = false
